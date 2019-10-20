@@ -111,7 +111,7 @@ def click_ball(event):
     global points, x, y
     for i in range(7):
         if ((event.x - x[i]) ** 2 +
-            (event.y - y[i]) ** 2) <= r[i] ** 2:
+                (event.y - y[i]) ** 2) <= r[i] ** 2:
             canv.delete(ball[i])
             canv.delete('points')
             points = points + 1
@@ -126,7 +126,7 @@ def click_square(event):
     global points, xs, ys
     for i in range(7):
         if ((event.x - xs[i]) ** 2 +
-            (event.y - ys[i]) ** 2) <= a[i] ** 2:
+                (event.y - ys[i]) ** 2) <= a[i] ** 2:
             canv.delete(square[i])
             canv.delete('points')
             points = points + 1
