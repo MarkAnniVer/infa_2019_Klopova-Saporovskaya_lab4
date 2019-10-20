@@ -10,7 +10,7 @@ canv = Canvas(root, bg='white')
 # Create active window with white background.
 canv.pack(fill=BOTH, expand=1)
 # Make active window have the same size with window.
-# For counting points.h
+# For counting points.
 points = 0
 x = 7 * [0]
 y = 7 * [0]
@@ -111,7 +111,7 @@ def click_ball(event):
     global points, x, y
     for i in range(7):
         if ((event.x - x[i]) ** 2 +
-                (event.y - y[i]) ** 2) <= r[i] ** 2:
+            (event.y - y[i]) ** 2) <= r[i] ** 2:
             canv.delete(ball[i])
             canv.delete('points')
             points = points + 1
@@ -126,7 +126,7 @@ def click_square(event):
     global points, xs, ys
     for i in range(7):
         if ((event.x - xs[i]) ** 2 +
-                (event.y - ys[i]) ** 2) <= a[i] ** 2:
+            (event.y - ys[i]) ** 2) <= a[i] ** 2:
             canv.delete(square[i])
             canv.delete('points')
             points = points + 1
