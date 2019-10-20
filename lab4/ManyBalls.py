@@ -10,7 +10,7 @@ canv = Canvas(root, bg='white')
 # Create active window with white background.
 canv.pack(fill=BOTH, expand=1)
 # Make active window have the same size with window.
-# For counting points.
+# For counting points.h
 points = 0
 x = 7 * [0]
 y = 7 * [0]
