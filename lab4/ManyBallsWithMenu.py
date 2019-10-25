@@ -8,7 +8,12 @@ canv = Canvas(root, bg='white')
 # Create active window with white background.
 canv.pack(fill=BOTH, expand=1)
 # Make active window have the same size with window.
+play = Button(canv, text="Play", width=20, height=3)
+finish = Button(canv, text="Exit", width=20, height=3)
+enter = Button(canv, text="Enter", width=20, height=3)
 # For counting points.
+gamer_name = ''
+place_for_name = ''
 points = 0
 x = 7 * [0]
 y = 7 * [0]
@@ -33,6 +38,33 @@ colors = [
 
 # Create massive with ball's colors.
 
+
+def exit_game():
+    sys.exit()
+
+
+def choose_player():
+    global place_for_name
+    finish.destroy()
+    place_for_name = Entry(canv, width=100)
+    enter['command'] = get_name
+    place_for_name.place(x=100, y=370)
+    enter.place(x=300, y=390)
+
+
+def get_name():
+    global gamer_name, place_for_name
+    gamer_name = place_for_name.get()
+    if gamer_name!='':
+        place_for_name.destroy()
+        enter.destroy()
+        new_ball()
+        new_square()
+    else:
+        place_for_name.destroy()
+        choose_player()
+
+
 def move_ball():
     global x, y, vx, vy
     for i in range(7):
@@ -50,6 +82,8 @@ def move_ball():
 
 def new_ball():
     global ball, x, y, r, vx, vy
+    play.destroy()
+    finish.destroy()
     for i in range(7):
         canv.delete(ball[i])
     for i in range(7):
@@ -132,8 +166,13 @@ def click_square(event):
 
 
 # Show points.
-new_ball()
-new_square()
+play.pack()
+finish.pack()
+finish.place(x=300, y=300)
+play.place(x=300, y=230)
+canv.pack(fil=BOTH, expand=1)
+play['command'] = choose_player
+finish['command'] = exit_game
 move_ball()
 move_square()
 canv.bind('<Button-3>', click_ball)
