@@ -4,6 +4,9 @@ import time
 import numpy as np
 
 root = Tk()
+mainmenu = Menu(root)
+root.config(menu=mainmenu)
+mainmenu.add_command(label='Файл')
 root.geometry('800x600')
 # Create window with size 800x600 pixels.
 canv = Canvas(root, bg='white')
@@ -20,10 +23,13 @@ xs = 7 * [0]
 ys = 7 * [0]
 vxs = 7 * [0]
 vys = 7 * [0]
+axs = 7*[0]
+ays = 7*[0]
 r = 7 * [0]
 a = 7 * [0]
 ball = 7 * [0]
 square = 7 * [0]
+t = 0
 colors = [
     'red',
     'orange',
@@ -72,22 +78,27 @@ def new_ball():
 # Create ball.
 
 def move_square():
-    global xs, ys, vxs, vys
+    global xs, ys, vxs, vys, t, axs, ays
     for i in range(7):
         canv.move(square[i], vxs[i], vys[i])
-        xs[i] = xs[i] + vxs[i]
-        ys[i] = ys[i] + vys[i]
+        xs[i] = xs[i] + vxs[i] #+ axs[i]*t
+        ys[i] = ys[i] + vys[i] #+ ays[i]*t
         if xs[i] <= a[i] or xs[i] >= 800 - a[i]:
             vxs[i] = - vxs[i]
+            #axs[i] = - axs[i]
+            #t = 0
         if ys[i] <= a[i] or ys[i] >= 600 - a[i]:
             vys[i] = - vys[i]
+            #ays[i] = - ays[i]
+            #t = 0
+        #t = t + 1
     root.after(int(1000 / 24), move_square)
 
 
 # Create a function, which moves ball.
 
 def new_square():
-    global square, xs, ys, a, vxs, vys
+    global square, xs, ys, a, vxs, vys, axs, ays
     for i in range(7):
         canv.delete(square[i])
     for i in range(7):
@@ -101,6 +112,8 @@ def new_square():
                                           width=5, tag='square[i]')
         vxs[i] = rnd(-10, 10)
         vys[i] = rnd(-10, 10)
+        axs[i] = 0.1
+        ays[i] = 0.1
         # move_square()
     root.after(2000, new_square)
 
@@ -129,7 +142,7 @@ def click_square(event):
                 (event.y - ys[i]) ** 2) <= a[i] ** 2:
             canv.delete(square[i])
             canv.delete('points')
-            points = points + 1
+            points = points + 2
             canv.create_text(50, 50, text=str(points),
                              anchor=CENTER, font="Purisa",
                              tag='points')
