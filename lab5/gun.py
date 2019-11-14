@@ -184,16 +184,14 @@ screen1 = canv.create_text(400, 300, text='', font='28')
 gun = Gun()
 bullet = 0
 
+
 def new_game(event=''):
     global screen1, balls, bullet
-    #targets = []
     target1 = Target()
     target2 = Target()
-    #targets.append(target1)
-    #targets.append(target2)
     bullet = 0
     balls = []
-    deadballs = []
+    dead_balls = []
     canv.bind('<Button-1>', gun.fire2_start)
     canv.bind('<ButtonRelease-1>', gun.fire2_end)
     canv.bind('<Motion>', gun.targeting)
@@ -205,7 +203,7 @@ def new_game(event=''):
         for b in balls:
             b.move()
             if b.isdead:
-                deadballs.append(b)
+                dead_balls.append(b)
             if b.hit_test(target1) and target1.live:
                 target1.live = 0
                 canv.delete(target1.id)
@@ -223,17 +221,17 @@ def new_game(event=''):
                     canv.itemconfig(screen1, text='Вы уничтожили цели за ' + str(bullet) + ' выстрела')
                 else:
                     canv.itemconfig(screen1, text='Вы уничтожили цели за ' + str(bullet) + ' выстрелов')
-        for i in deadballs:
+        for i in dead_balls:
             balls.remove(i)
             canv.delete(i.id)
-        deadballs = []
+        dead_balls = []
         canv.update()
         time.sleep(0.03)
         gun.targeting()
         gun.power_up()
     canv.itemconfig(screen1, text='')
     canv.delete(Gun)
-    "root.after(750000000, new_game)"
+    root.after(7500, new_game)
 
 
 new_game()
