@@ -90,7 +90,7 @@ class Gun:
     def __init__(self):
         self.id = canv.create_line(20, 450, 50, 420, width=7)
 
-    def fire2_start(self):
+    def fire2_start(self, event):
         self.f2_on = 1
 
     def fire2_end(self, event):
@@ -144,7 +144,6 @@ class Target:
         self.color = 'red'
         self.id = canv.create_oval(0, 0, 0, 0)
         self.vy = 2
-        # self.new_target()
         self.id = canv.create_oval(
             self.x - self.r,
             self.y - self.r,
@@ -186,7 +185,7 @@ gun = Gun()
 bullet = 0
 
 
-def new_game():
+def new_game(event=''):
     global screen1, balls, bullet
     target1 = Target()
     target2 = Target()
@@ -236,6 +235,7 @@ def new_game():
         gun.targeting()
         gun.power_up()
     time.sleep(3)
+    print('HERERERERERERERERERERERE')
     canv.delete(Gun)
     root.after(750, new_game)
 
