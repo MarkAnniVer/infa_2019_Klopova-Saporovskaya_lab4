@@ -90,7 +90,7 @@ class Gun:
     def __init__(self):
         self.id = canv.create_line(20, 450, 50, 420, width=7)
 
-    def fire2_start(self, event):
+    def fire2_start(self):
         self.f2_on = 1
 
     def fire2_end(self, event):
@@ -186,7 +186,7 @@ gun = Gun()
 bullet = 0
 
 
-def new_game(event=''):
+def new_game():
     global screen1, balls, bullet
     target1 = Target()
     target2 = Target()
